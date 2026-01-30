@@ -259,6 +259,12 @@
             <div id="loops"></div>
         </div>
         
+        <!-- GitHub Builds -->
+        <div class="card">
+            <h2>🔨 Latest Builds</h2>
+            <div id="github"></div>
+        </div>
+        
         <!-- Today in History -->
         <div class="card">
             <h2>📅 Today in History</h2>
@@ -290,11 +296,11 @@
                 "location": "Kansas City"
             },
             "tasks": [
-                { "title": "Boss negotiation - extra week off for daughter's camp", "priority": "high", "due": "Monday", "nextStep": "Write 3 talking points focusing on emotional angle" },
-                { "title": "Draft LOA Sustainer pitch deck", "priority": "high", "nextStep": "Outline the problem → guide → plan → success structure" },
-                { "title": "Review CAET Advanced - Tom's feedback", "priority": "high", "due": "Jan 31", "nextStep": "Open Tom's email and read feedback" },
-                { "title": "Update DC questions", "priority": "medium", "due": "Jan 31", "nextStep": "Pull up DC question bank spreadsheet" },
-                { "title": "Mailerkit marketing blasts", "priority": "medium", "nextStep": "Define campaign goal and audience" }
+                { "title": "Boss negotiation - extra week off for daughter's camp", "priority": "high", "due": "Monday", "nextStep": "Write down: 'What would happen if I couldn't go?' — make HIM answer it" },
+                { "title": "Draft LOA Sustainer pitch deck", "priority": "high", "nextStep": "Open Google Slides, create title slide: 'The Military-to-Civilian Pipeline Problem'" },
+                { "title": "Review CAET Advanced - Tom's feedback", "priority": "high", "due": "Jan 31", "nextStep": "Search inbox for 'Tom CAET' — flag the email" },
+                { "title": "Update DC questions", "priority": "medium", "due": "Jan 31", "nextStep": "Open test-caet-fund/dc/data/questions.json in VS Code" },
+                { "title": "Mailerkit marketing blasts", "priority": "medium", "nextStep": "Text Michael: 'What's the goal for the next email blast?'" }
             ],
             "suggestion": {
                 "focus": "Boss Negotiation Prep",
@@ -309,6 +315,10 @@
                 { "year": 1933, "event": "Hitler sworn in as Chancellor of Germany" },
                 { "year": 1948, "event": "Gandhi assassinated in New Delhi" },
                 { "year": 1969, "event": "Beatles' last public performance (Apple rooftop)" }
+            ],
+            "github": [
+                { "name": "Assessment Factory", "url": "https://github.com/00ainick-cmd/assessment-factory", "status": "new" },
+                { "name": "Morning Brief", "url": "https://github.com/00ainick-cmd/morning-brief", "status": "updated" }
             ]
         };
         
@@ -356,6 +366,18 @@
                 </div>
             `).join('');
             document.getElementById('loops').innerHTML = loopsHtml;
+            
+            // GitHub
+            const githubHtml = BRIEF_DATA.github.map(g => `
+                <div class="loop-item">
+                    <span class="loop-icon">📦</span>
+                    <div>
+                        <div><a href="${g.url}" target="_blank" style="color:#00d4ff; text-decoration:none;">${g.name}</a></div>
+                        <div class="loop-due">${g.status}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('github').innerHTML = githubHtml;
             
             // History
             const historyHtml = BRIEF_DATA.history.map(h => `
