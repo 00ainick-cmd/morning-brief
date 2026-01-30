@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦀 Morning Brief</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0 30px;
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        header .date {
+            color: #888;
+            font-size: 1rem;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .card h2 {
+            font-size: 0.9rem;
+            color: #e94560;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Stoic Quote */
+        .stoic-card {
+            background: linear-gradient(135deg, rgba(233,69,96,0.15), rgba(255,107,107,0.05));
+            border-color: rgba(233,69,96,0.3);
+        }
+        
+        .stoic-card blockquote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .stoic-card .author {
+            color: #e94560;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .stoic-card .reflection {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Weather */
+        .weather-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .weather-temp {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #fff;
+        }
+        
+        .weather-details {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Tasks */
+        .task-list {
+            list-style: none;
+        }
+        
+        .task-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .task-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .task-priority {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        
+        .priority-high { background: #ff6b6b; }
+        .priority-medium { background: #ffd93d; }
+        .priority-low { background: #6bcb77; }
+        
+        /* Suggestion */
+        .suggestion-card {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,193,7,0.05));
+            border-color: rgba(255,215,0,0.3);
+        }
+        
+        .suggestion-focus {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .suggestion-action {
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        /* History */
+        .history-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        
+        .history-year {
+            color: #e94560;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        /* Open Loops */
+        .loop-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .loop-item:last-child {
+            border-bottom: none;
+        }
+        
+        .loop-icon {
+            font-size: 1.2rem;
+        }
+        
+        .loop-due {
+            font-size: 0.8rem;
+            color: #e94560;
+            margin-top: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        
+        .refresh-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: rgba(233,69,96,0.2);
+            color: #e94560;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦀 Morning Brief</h1>
+            <div class="date" id="date"></div>
+        </header>
+        
+        <!-- Stoic Quote -->
+        <div class="card stoic-card">
+            <h2>🏛️ Stoic Fuel</h2>
+            <blockquote id="stoic-quote"></blockquote>
+            <div class="author" id="stoic-author"></div>
+            <div class="reflection" id="stoic-reflection"></div>
+        </div>
+        
+        <!-- Weather -->
+        <div class="card">
+            <h2>🌤️ Weather</h2>
+            <div class="weather-row">
+                <div class="weather-temp" id="weather-temp">--°</div>
+                <div class="weather-details">
+                    <div id="weather-condition">Loading...</div>
+                    <div id="weather-hilo">H: --° L: --°</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Today's Tasks -->
+        <div class="card">
+            <h2>🎯 Today's Focus</h2>
+            <ul class="task-list" id="tasks"></ul>
+        </div>
+        
+        <!-- Ace's Suggestion -->
+        <div class="card suggestion-card">
+            <h2>💡 Ace's Take</h2>
+            <div class="suggestion-focus" id="suggestion-focus"></div>
+            <div class="suggestion-action" id="suggestion-action"></div>
+        </div>
+        
+        <!-- Open Loops -->
+        <div class="card">
+            <h2>🔄 Open Loops</h2>
+            <div id="loops"></div>
+        </div>
+        
+        <!-- Today in History -->
+        <div class="card">
+            <h2>📅 Today in History</h2>
+            <div id="history"></div>
+        </div>
+        
+        <footer>
+            Built by Ace 🦀<br>
+            Last updated: <span id="updated"></span>
+            <br>
+            <button class="refresh-btn" onclick="location.reload()">Refresh</button>
+        </footer>
+    </div>
+    
+    <script>
+        // Data injected at build time
+        const BRIEF_DATA = {
+            "generated": "2026-01-30T04:20:00Z",
+            "stoic": {
+                "quote": "Waste no more time arguing about what a good man should be. Be one.",
+                "author": "Marcus Aurelius",
+                "reflection": "Less talk, more action. What would the person you want to be do right now?"
+            },
+            "weather": {
+                "temp": 24,
+                "condition": "Clear",
+                "high": 30,
+                "low": 19,
+                "location": "Kansas City"
+            },
+            "tasks": [
+                { "title": "Boss negotiation - extra week off for daughter's camp", "priority": "high", "due": "Monday" },
+                { "title": "Draft LOA Sustainer pitch deck", "priority": "high" },
+                { "title": "Review CAET Advanced - Tom's feedback", "priority": "high", "due": "Jan 31" },
+                { "title": "Update DC questions", "priority": "medium", "due": "Jan 31" },
+                { "title": "Mailerkit marketing blasts", "priority": "medium" }
+            ],
+            "suggestion": {
+                "focus": "Boss Negotiation Prep",
+                "action": "Monday is the big conversation. Don't attack the policy — make him discover the problem himself. Lead with the emotional truth: this is a once-in-her-life middle school window. He's the only one the policy actually affects. You're not asking for special treatment, you're asking him to see the situation clearly."
+            },
+            "loops": [
+                { "item": "Patrick/NextOp meeting needs reschedule", "due": "Conflicts with Feb 3 acupuncture", "icon": "📅" },
+                { "item": "GitHub auth setup", "due": "Started Jan 28", "icon": "🔧" },
+                { "item": "AWS SSH access broken", "due": "Security group issue", "icon": "🔐" }
+            ],
+            "history": [
+                { "year": 1933, "event": "Hitler sworn in as Chancellor of Germany" },
+                { "year": 1948, "event": "Gandhi assassinated in New Delhi" },
+                { "year": 1969, "event": "Beatles' last public performance (Apple rooftop)" }
+            ]
+        };
+        
+        // Render
+        function render() {
+            const now = new Date();
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+            
+            // Stoic
+            document.getElementById('stoic-quote').textContent = `"${BRIEF_DATA.stoic.quote}"`;
+            document.getElementById('stoic-author').textContent = `— ${BRIEF_DATA.stoic.author}`;
+            document.getElementById('stoic-reflection').textContent = BRIEF_DATA.stoic.reflection;
+            
+            // Weather
+            document.getElementById('weather-temp').textContent = `${BRIEF_DATA.weather.temp}°`;
+            document.getElementById('weather-condition').textContent = `${BRIEF_DATA.weather.condition} • ${BRIEF_DATA.weather.location}`;
+            document.getElementById('weather-hilo').textContent = `H: ${BRIEF_DATA.weather.high}° L: ${BRIEF_DATA.weather.low}°`;
+            
+            // Tasks
+            const tasksHtml = BRIEF_DATA.tasks.map(t => `
+                <li>
+                    <span class="task-priority priority-${t.priority}"></span>
+                    <span>${t.title}${t.due ? ` <em style="color:#888">(${t.due})</em>` : ''}</span>
+                </li>
+            `).join('');
+            document.getElementById('tasks').innerHTML = tasksHtml;
+            
+            // Suggestion
+            document.getElementById('suggestion-focus').textContent = BRIEF_DATA.suggestion.focus;
+            document.getElementById('suggestion-action').textContent = BRIEF_DATA.suggestion.action;
+            
+            // Loops
+            const loopsHtml = BRIEF_DATA.loops.map(l => `
+                <div class="loop-item">
+                    <span class="loop-icon">${l.icon}</span>
+                    <div>
+                        <div>${l.item}</div>
+                        <div class="loop-due">${l.due}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('loops').innerHTML = loopsHtml;
+            
+            // History
+            const historyHtml = BRIEF_DATA.history.map(h => `
+                <div class="history-item">
+                    <span class="history-year">${h.year}</span>${h.event}
+                </div>
+            `).join('');
+            document.getElementById('history').innerHTML = historyHtml;
+            
+            // Updated
+            document.getElementById('updated').textContent = new Date(BRIEF_DATA.generated).toLocaleString();
+        }
+        
+        render();
+    </script>
+</body>
+</html>
