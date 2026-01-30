@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦀 Morning Brief</title>
+    <title>🦀 Genesis Brief</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1a1a2e">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -216,7 +216,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>🦀 Morning Brief</h1>
+            <h1>🧬 Genesis Brief</h1>
             <div class="date" id="date"></div>
         </header>
         
@@ -290,11 +290,11 @@
                 "location": "Kansas City"
             },
             "tasks": [
-                { "title": "Boss negotiation - extra week off for daughter's camp", "priority": "high", "due": "Monday" },
-                { "title": "Draft LOA Sustainer pitch deck", "priority": "high" },
-                { "title": "Review CAET Advanced - Tom's feedback", "priority": "high", "due": "Jan 31" },
-                { "title": "Update DC questions", "priority": "medium", "due": "Jan 31" },
-                { "title": "Mailerkit marketing blasts", "priority": "medium" }
+                { "title": "Boss negotiation - extra week off for daughter's camp", "priority": "high", "due": "Monday", "nextStep": "Write 3 talking points focusing on emotional angle" },
+                { "title": "Draft LOA Sustainer pitch deck", "priority": "high", "nextStep": "Outline the problem → guide → plan → success structure" },
+                { "title": "Review CAET Advanced - Tom's feedback", "priority": "high", "due": "Jan 31", "nextStep": "Open Tom's email and read feedback" },
+                { "title": "Update DC questions", "priority": "medium", "due": "Jan 31", "nextStep": "Pull up DC question bank spreadsheet" },
+                { "title": "Mailerkit marketing blasts", "priority": "medium", "nextStep": "Define campaign goal and audience" }
             ],
             "suggestion": {
                 "focus": "Boss Negotiation Prep",
@@ -333,7 +333,10 @@
             const tasksHtml = BRIEF_DATA.tasks.map(t => `
                 <li>
                     <span class="task-priority priority-${t.priority}"></span>
-                    <span>${t.title}${t.due ? ` <em style="color:#888">(${t.due})</em>` : ''}</span>
+                    <div>
+                        <div>${t.title}${t.due ? ` <em style="color:#888">(${t.due})</em>` : ''}</div>
+                        ${t.nextStep ? `<div style="color:#6bcb77; font-size:0.85rem; margin-top:4px;">→ ${t.nextStep}</div>` : ''}
+                    </div>
                 </li>
             `).join('');
             document.getElementById('tasks').innerHTML = tasksHtml;
